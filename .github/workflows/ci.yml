@@ -23,13 +23,11 @@ jobs:
 
       - name: Run unit tests
         run: |
-        PYTHONPATH=. pytest -q
-
+          PYTHONPATH=. pytest -q
 
       - name: Coverage metric
         run: |
-        PYTHONPATH=. pytest --cov=app --cov-report=term-missing
-
+          PYTHONPATH=. pytest --cov=app --cov-report=term-missing
 
   build-and-push:
     needs: test-and-coverage
