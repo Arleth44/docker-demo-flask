@@ -47,4 +47,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/docker-demo-flask:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/docker-demo-flask:latestdocker logoutdocker logoutdocker logout
