@@ -1,0 +1,43 @@
+name: Validación de compilación Docker
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  checks_build:
+    name: Comprobaciones con docker/build (build-push-action)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Ejecutar comprobación con docker/build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          call: check
+
+  checks_bake:
+    name: Comprobaciones con docker/bake (bake-action)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Ejecutar comprobación con docker/bake
+        uses: docker/bake-action@v6
+        with:
+          files: ./docker-bake.hcl
+          targets: validate-build
+          call: check
